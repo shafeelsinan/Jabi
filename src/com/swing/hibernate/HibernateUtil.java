@@ -29,19 +29,17 @@ public class HibernateUtil {
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
 
                 configuration.setProperties(settings);
 
-//                configuration.addAnnotatedClass(Student.class);
+                configuration.addAnnotatedClass(Student.class);
 //                configuration.addPackage("com.swing.entity");
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 
-                sessionFactory = configuration.addPackage("com.swing.entity").
-                		addAnnotatedClass(Student.class).
-                		buildSessionFactory(serviceRegistry);
+                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 e.printStackTrace();
             }

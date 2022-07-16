@@ -1,4 +1,4 @@
-package com.swing.main;
+package com.swing.service;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -6,17 +6,10 @@ import org.hibernate.Transaction;
 import com.swing.entity.Student;
 import com.swing.hibernate.HibernateUtil;
 
-public class App {
-
-	public static void main(String args[])
-	{
-		System.out.println("Started");
-        Student student = new Student();
-        student.setName("Sinan");
-        saveStudent(student);
-	}
+public class StudentService {
 	
-	public static void saveStudent(Student student) {
+	
+	public void saveStudent(Student student) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -32,4 +25,5 @@ public class App {
             e.printStackTrace();
         }
     }
+
 }
