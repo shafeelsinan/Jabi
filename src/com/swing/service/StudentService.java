@@ -2,11 +2,8 @@ package com.swing.service;
 
 import java.io.Serializable;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.swing.entity.Student;
 import com.swing.hibernate.HibernateUtil;
 
 public class StudentService {
@@ -42,5 +39,10 @@ public class StudentService {
 	public Object find(Class clazz, Serializable key) {
 		return session.find(clazz, key);
 
+	}
+	
+	public List find(String Query)
+	{
+		return session.createSQLQuery(Query).list();
 	}
 }
