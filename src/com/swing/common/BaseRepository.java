@@ -1,19 +1,12 @@
-package com.swing.service;
-
-import java.io.Serializable;
-import java.util.List;
+package com.swing.common;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.swing.entity.Student;
 import com.swing.hibernate.HibernateUtil;
 
-public class StudentService {
-	
-	Session session = HibernateUtil.getSessionFactory().openSession();
-	
-	public void saveStudent(Object obj) {
+public class BaseRepository {
+
+	public void save(Object obj) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -29,18 +22,4 @@ public class StudentService {
             e.printStackTrace();
         }
     }
-	
-	public List find(final Class clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("Class to list must not be null");
-		}
-		List list = session.createQuery(
-				"from " + clazz.getName() + " entity").getResultList();
-		return list;
-	}
-
-	public Object find(Class clazz, Serializable key) {
-		return session.find(clazz, key);
-
-	}
 }
